@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{925FE65C-CC99-45B1-A340-A1BF0D5FFDD8}</ProjectGuid>
-    <RootNamespace>PJSDA1</RootNamespace>
+    <ProjectGuid>{57F21018-CB49-43CA-A8D6-81B7B87746E7}</ProjectGuid>
+    <RootNamespace>Sprint1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -123,7 +123,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="labyrintheMb.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="tableauMb.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="labyrintheMb.h" />
+    <ClInclude Include="tableauMb.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="inSmall.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
