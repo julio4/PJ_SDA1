@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
-project(untitled)
+project(pj_sda1)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(untitled main.cpp)
+add_executable(pj_sda1 main.cpp)
