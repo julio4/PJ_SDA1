@@ -9,7 +9,7 @@ enum {NB_DAMIERS = 2};
 #include "labyrintheMb.h"
 
 int main() {
-	char tableauMb[NB_DAMIERS][2][2];
+
 	ifstream in;
 	in.open("inSmall.txt");
 	if (!in) {
@@ -20,19 +20,41 @@ int main() {
 
 	int m; // x (colonne)
 	in >> m;
+
 	int n; // y (ligne)
 	in >> n;
 
 	//faire allocation dynamique de tableauMb du nb de colonnes et de lignes de chaque damier avec tableauMb[-][m][n]
 
+	char*** tableauMb = new char** [NB_DAMIERS];
+	for (int i = 0; i < NB_DAMIERS; ++i) {
+		tableauMb[i] = new char*[m];
+		for (int j = 0; j < m; ++j) {
+			tableauMb[i][j] = new char[n];
+		}
+	}
+	cout << m << " " << n << endl;
 
-
-	char a;
-	in >> a;
-	while (in) {
-		cout << a;
-		in >> a;
+	//Enregistrement des tableaux
+	char c;
+	for (int i = 0; i < NB_DAMIERS; ++i) {
+		//RECUPERE TABLEAU DANS tableauMd[i][m][n]
+		for (int j = 0; j < n; ++j) {
+			//RECUPERE ligne m
+			for (int l = 0; l < m; ++l) {
+				in >> c;
+				tableauMb[i][j][l] = c;
+				cout << tableauMb[i][j][l];
+			}
+			cout << endl;
+		}
+		cout << endl << endl;
 	}
 	in.close();
+
+
+
+
+
 	return 0;
 }
