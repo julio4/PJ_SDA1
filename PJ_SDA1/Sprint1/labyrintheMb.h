@@ -1,7 +1,5 @@
 #pragma once
 
-void initialiser();
-
-void detruire();
+#include "tableauMb.h"
 
 void affichersp1();

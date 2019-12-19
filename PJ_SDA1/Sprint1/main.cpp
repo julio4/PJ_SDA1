@@ -5,7 +5,6 @@ using namespace std;
 
 enum {NB_DAMIERS = 2};
 
-#include "tableauMb.h"
 #include "labyrintheMb.h"
 
 int main() {
