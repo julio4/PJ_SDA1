@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{57F21018-CB49-43CA-A8D6-81B7B87746E7}</ProjectGuid>
-    <RootNamespace>Sprint1</RootNamespace>
+    <ProjectGuid>{B7BAF78B-E979-4108-B5FE-7BF8DBE324A1}</ProjectGuid>
+    <RootNamespace>Sprint2</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
@@ -81,7 +81,7 @@
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
@@ -123,14 +123,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="case.h" />
+    <ClInclude Include="dragonGame.h" />
+    <ClInclude Include="indexPositionMb.h" />
+    <ClInclude Include="item.h" />
+    <ClInclude Include="itemMb.h" />
+    <ClInclude Include="labyrintheMb.h" />
+    <ClInclude Include="position.h" />
+    <ClInclude Include="tableauMb.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dragonGame.cpp" />
+    <ClCompile Include="indexPositionMb.cpp" />
     <ClCompile Include="labyrintheMb.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="tableauMb.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="item.h" />
-    <ClInclude Include="labyrintheMb.h" />
-    <ClInclude Include="tableauMb.h" />
+    <Text Include="..\Sprint1\inSmall.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
