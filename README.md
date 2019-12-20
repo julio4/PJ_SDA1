@@ -1,11 +1,12 @@
-# PJ_IAP1
+# PJ_SDA1
 
 [@LightBowFire](https://github.com/LightBowFire)
 [@Julio4](https://github.com/julio4)
 
 ## Presentation
 
-PROJET SDA
+PROJET SDA 1
+2019-2020
 
 ## Arborescence
 
@@ -15,7 +16,7 @@ PROJET SDA
 
 ## Sprint
 
-- [ ] Sprint 1
+- [x] Sprint 1
 - [ ] Sprint 2
 - [ ] Sprint 3
 - [ ] Sprint 4
