@@ -1,59 +1,78 @@
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-using namespace std;
+/**
+ * @file main.cpp
+ * @author Jules Doumèche, Martin Gwenole
+ * @version 1 - 2019
+ * @brief  Projet SDA - Sprint 1
+ */
 
-enum {NB_DAMIERS = 2};
+/*
+ARBORESCENCE DES #INCLUDE:
 
-#include "labyrintheMb.h"
+							+----------+
+							| main.cpp |
+							+----+-----+
+								 ^
+								 |
+								 |
+						   +-----+-------+        +---------------+
+						   | tableauMb.h +<-------+ tableauMb.cpp |
+						   +-----+-------+        +---------------+
+		 +-----------+           ^
+		 | <fstream> +------+    |
+		 +-----------+      v    |
+						 +--+----+--------+     +------------------+
+						 | labyrintheMb.h +<----+ labyrintheMb.cpp |
+						 +--+----+--------+     +------------------+
+		+------------+      ^    ^
+		| <iostream> +------+    |
+		+------------+           |
+							 +---+----+
+							 | item.h |
+							 +--------+
+
+*/
+
+#include "tableauMb.h"
+
+const char FICHIER[STRING_SIZE] = "inSmall.txt";
 
 int main() {
 
+	// Initialisation variable + input stream
+
+	int x = 0; // x, colonne
+	int y = 0; // y, ligne
+
 	ifstream in;
-	in.open("inSmall.txt");
+	/* Ouverture du fichier .txt via la console
+	char fic[STRING_SIZE] = { NULL };
+	do {
+		cout << "Entrez fichier à ouvrir:";
+		cin >> fic;
+		cout << endl;
+		in.open(fic);
+		if (!in) {
+			cout << "Erreur!" << endl;
+			cerr << "Fichier introuvable" << endl;
+			//return 1;
+		}
+	} while (!in); */
+	in.open(FICHIER);
 	if (!in) {
 		cout << "Erreur!" << endl;
 		cerr << "Fichier introuvable" << endl;
 		return 1;
 	}
 
-	int m; // x (colonne)
-	in >> m;
+	// Execution Sprint1
 
-	int n; // y (ligne)
-	in >> n;
+	ItemMb*** tableauMb = initialiserTab(in, x, y);
+	initialiserLab(in, tableauMb, x, y);
 
-	//faire allocation dynamique de tableauMb du nb de colonnes et de lignes de chaque damier avec tableauMb[-][m][n]
+	affichersp1(tableauMb, x, y);
 
-	char*** tableauMb = new char** [NB_DAMIERS];
-	for (int i = 0; i < NB_DAMIERS; ++i) {
-		tableauMb[i] = new char*[m];
-		for (int j = 0; j < m; ++j) {
-			tableauMb[i][j] = new char[n];
-		}
-	}
-	cout << m << " " << n << endl;
-
-	//Enregistrement des tableaux
-	char c;
-	for (int i = 0; i < NB_DAMIERS; ++i) {
-		//RECUPERE TABLEAU DANS tableauMd[i][m][n]
-		for (int j = 0; j < n; ++j) {
-			//RECUPERE ligne m
-			for (int l = 0; l < m; ++l) {
-				in >> c;
-				tableauMb[i][j][l] = c;
-				cout << tableauMb[i][j][l];
-			}
-			cout << endl;
-		}
-		cout << endl << endl;
-	}
 	in.close();
-
-
-
-
-
+	detruireLab(tableauMb, x, y);
+	detruireTab(tableauMb, x, y);
 	return 0;
 }
