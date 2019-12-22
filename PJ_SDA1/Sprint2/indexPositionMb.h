@@ -2,4 +2,4 @@
 
 #include "item.h"
 
-void initialiserPos();
+Position initialiserPos(Item*** tab, unsigned int& x, unsigned int& y);
