@@ -1,0 +1,1 @@
+Fichier tableauMb.cpp -- > Regarder la fonction detruireTab, laisser uniquement les 3 dernières lignes suffit. (je crois)
