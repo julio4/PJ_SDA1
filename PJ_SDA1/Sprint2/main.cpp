@@ -34,10 +34,12 @@ ARBORESCENCE DES #INCLUDE:
 
 #include "tableauMb.h"
 #include "dragonGame.h"
+#include <clocale>
 
 const char FICHIER[STRING_SIZE] = "inSmall.txt";
 
 int main() {
+	//locale::global(locale{ "" });
 
 	// Initialisation variable + input stream
 
@@ -47,15 +49,15 @@ int main() {
 	/* Ouverture du fichier .txt via la console
 	char fic[STRING_SIZE] = { NULL };
 	do {
-		cout << "Entrez fichier à ouvrir:";
-		cin >> fic;
-		cout << endl;
-		in.open(fic);
-		if (!in) {
-			cout << "Erreur!" << endl;
-			cerr << "Fichier introuvable" << endl;
-			//return 1;
-		}
+	cout << "Entrez fichier à ouvrir:";
+	cin >> fic;
+	cout << endl;
+	in.open(fic);
+	if (!in) {
+	cout << "Erreur!" << endl;
+	cerr << "Fichier introuvable" << endl;
+	//return 1;
+	}
 	} while (!in); */
 	if (!in) {
 		cout << "Erreur!" << endl;
