@@ -70,9 +70,12 @@ int main() {
 	initialiserLab(in, tableauMb, m, n);
 	in.close();
 
-
-	Position posDrag = initialiserPos(tableauMb, m, n);
+	Position posDrag;
+	Position posPDM;
+	initialiserPos(posDrag, posPDM, tableauMb, m, n);
 	stack<Position> pile = initialiserDrag(posDrag);
+
+	missionDragonSp2(tableauMb, pile, posDrag, posPDM, m, n);
 
 	affichersp2(tableauMb, m, n);
 

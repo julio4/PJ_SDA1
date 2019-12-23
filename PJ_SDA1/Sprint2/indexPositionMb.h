@@ -3,4 +3,4 @@
 #include "item.h"
 #include <stack>
 
-Position initialiserPos(Item*** tab, unsigned int& x, unsigned int& y);
+void initialiserPos(Position& posDrag, Position& posPDM, Item*** tab, unsigned int& x, unsigned int& y);
