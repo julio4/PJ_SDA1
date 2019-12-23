@@ -41,6 +41,9 @@ int main() {
 	int x = 0; // x, colonne
 	int y = 0; // y, ligne
 
+	int coordx = 0;
+	int coordy = 0;
+
 	ifstream in;
 	/* Ouverture du fichier .txt via la console
 	char fic[STRING_SIZE] = { NULL };
@@ -67,10 +70,52 @@ int main() {
 	ItemMb*** tableauMb = initialiserTab(in, x, y);
 	initialiserLab(in, tableauMb, x, y);
 
-	affichersp1(tableauMb, x, y);
+	recherche(tableauMb, x, y, coordx, coordy);
+	cout << coordx << " " << coordy << endl;
 
 	in.close();
+
 	detruireLab(tableauMb, x, y);
 	detruireTab(tableauMb, x, y);
+
 	return 0;
+}
+
+void recherche(ItemMb*** tab, int& x, int& y) {
+
+	ifstream iread;
+	iread.open(file_in, ifstream::in);
+
+	char c = NULL;
+	Position spyro, plan;
+
+	for (int i = 0; i < NB_DAMIERS; ++i) {
+		//Lire tab[i]
+		for (int j = 0; j < y; ++j) {
+			//Lire ligne j
+			for (int k = 0; k < x; ++k) {
+				c = tab[i][j][k];
+				if (c == 'D') {
+					init_pos(spyro, i, j, k);
+				}
+				if (c == 'P') {
+					init_pos(plan, i, j, k);
+				}
+			}
+		}
+	}
+
+	iread.close();
+}
+
+void init_pos(Position& pos,int& z, int& y, int& x) {
+	
+	pos.x = x;
+	pos.y = y;
+	pos.z = z;
+
+}
+
+void fonction_principal_selon_hugo(Position& spyro, Position& peach) {
+
 }
