@@ -18,9 +18,6 @@
     <ClInclude Include="item.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="itemMb.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="labyrintheMb.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>

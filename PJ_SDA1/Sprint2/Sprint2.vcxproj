@@ -127,7 +127,6 @@
     <ClInclude Include="dragonGame.h" />
     <ClInclude Include="indexPositionMb.h" />
     <ClInclude Include="item.h" />
-    <ClInclude Include="itemMb.h" />
     <ClInclude Include="labyrintheMb.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="tableauMb.h" />

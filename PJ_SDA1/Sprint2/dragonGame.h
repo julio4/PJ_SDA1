@@ -2,8 +2,8 @@
 
 #include "indexPositionMb.h"
 
-void initialiserDrag();
+stack<Position> initialiserDrag(Position& posDrag);
 
-void detruireDrag();
+void detruireDrag(stack<Position>& pile);
 
-void missionDragonSp2();
+void missionDragonSp2(Item*** tab, stack<Position>& pile, Position& posDrag);

@@ -68,10 +68,21 @@ int main() {
 
 	Item*** tableauMb = initialiserTab(m, n);
 	initialiserLab(in, tableauMb, m, n);
+	in.close();
+
+
+	Position posDrag = initialiserPos(tableauMb, m, n);
+	stack<Position> pile = initialiserDrag(posDrag);
 
 	affichersp2(tableauMb, m, n);
 
-	in.close();
+	// Developpement
+
+	cout << endl;
+	cout << "z = " << pile.top().z << " y = " << pile.top().y << " x = " << pile.top().x << endl;
+
+	//
+
 	detruireLab(tableauMb, m, n);
 	detruireTab(tableauMb, m, n);
 	return 0;

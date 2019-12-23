@@ -7,9 +7,4 @@
 
 #include "case.h"
 
-using namespace std;
 typedef Case Item;
-
-//Constantes
-
-enum { STRING_SIZE = 30, NB_DAMIERS = 2};
