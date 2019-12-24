@@ -1,7 +1,7 @@
 #include "indexPositionMb.h"
 #include <iostream>
 
-void initialiserPos(Lab lab, Dragon drag) {
+void initialiserPos(Lab& lab, Dragon& drag) {
 	bool initDrag = false;
 	bool initPDM = false;
 	for (unsigned int i = 0; i < NB_DAMIERS; ++i) {
@@ -11,7 +11,6 @@ void initialiserPos(Lab lab, Dragon drag) {
 						drag.pos.z = i;
 						drag.pos.y = j;
 						drag.pos.x = l;
-						drag.move.push(drag.pos);
 						initDrag = true;
 					}
 					if (lab.tab[i][j][l].car == 'P') {

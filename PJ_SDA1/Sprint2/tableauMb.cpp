@@ -13,16 +13,14 @@
 * @param[in,out] y : nombre de lignes du labyrinthe
 * @return tab : le tableau 3D d'ItemMb
 */
-Case*** initialiserTab(unsigned int& x, unsigned int& y) {
-
-	Case*** tab = new Case**[NB_DAMIERS];
+void initialiserTab(Lab& lab) {
+	lab.tab = new Case**[NB_DAMIERS];
 	for (unsigned int i = 0; i < NB_DAMIERS; ++i) {
-		tab[i] = new Case*[y];
-		for (unsigned int j = 0; j < y; ++j) {
-			tab[i][j] = new Case[x];
+		lab.tab[i] = new Case*[lab.lin];
+		for (unsigned int j = 0; j < lab.lin; ++j) {
+			lab.tab[i][j] = new Case[lab.col];
 		}
 	}
-	return tab;
 }
 
 /**
@@ -33,7 +31,7 @@ Case*** initialiserTab(unsigned int& x, unsigned int& y) {
 * @param[in,out] y : nombre de lignes du labyrinthe
 * @pre tab est initialisé
 */
-void detruireTab(Lab lab) {
+void detruireTab(Lab& lab) {
 	for (unsigned int i = 0; i < NB_DAMIERS; ++i) {
 		for (unsigned int j = 0; j < lab.lin; ++j) {
 			delete[] lab.tab[i][j];

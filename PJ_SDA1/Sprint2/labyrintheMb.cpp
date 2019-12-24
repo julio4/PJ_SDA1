@@ -13,7 +13,7 @@
 * @param[in] y : nombre de lignes du tableau
 * @pre tab est initialisé, in est ouvert
 */
-void initialiserLab(ifstream& in, Lab lab) {
+void initialiserLab(ifstream& in, Lab& lab) {
 	for (unsigned int i = 0; i < NB_DAMIERS; ++i) {
 		//Ecrit tableau[i]
 		for (unsigned int j = 0; j < lab.lin; ++j) {
@@ -33,7 +33,7 @@ void initialiserLab(ifstream& in, Lab lab) {
 * @param[in] y : nombre de lignes du labyrinthe
 * @pre tab est initialisé
 */
-void detruireLab(Lab lab) {
+void detruireLab(Lab& lab) {
 	for (unsigned int i = 0; i < NB_DAMIERS; ++i) {
 		//Supprime tab[i]
 		for (unsigned int j = 0; j < lab.lin; ++j) {
@@ -53,7 +53,7 @@ void detruireLab(Lab lab) {
 * @param[in] y : nombre de lignes du labyrinthe
 * @pre tab est initialisé et affecté
 */
-void affichersp2(Lab lab) {
+void affichersp2(Lab& lab) {
 	cout << lab.col << " " << lab.lin << endl;
 	for ( unsigned int i = 0; i < NB_DAMIERS; ++i) {
 		//Lire tab[i]

@@ -2,4 +2,4 @@
 
 #include "item.h"
 
-void initialiserPos(Lab lab, Dragon drag);
+void initialiserPos(Lab& lab, Dragon& drag);

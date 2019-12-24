@@ -4,22 +4,27 @@
 
 Dragon initialiserDrag() {
 	Dragon drag;
+	drag.pos.z = 0;
+	drag.pos.y = 0;
+	drag.pos.x = 0;
 	return drag;
 }
 
-void detruireDrag(stack<Position>& pile){
-	while (!pile.empty()) {
-		pile.pop();
-	}
+void detruireDrag(Dragon& drag){
+	drag.pos.z = 0;
+	drag.pos.y = 0;
+	drag.pos.x = 0;
 }
 
-void missionDragonSp2(Lab lab, Dragon drag) {
+void missionDragonSp2(Lab& lab, Dragon& drag) {
 	unsigned int nb = 0;
-	while (nb < 10 && !(drag.move.empty())) {
-		drag.pos = drag.move.top();
+	stack<Position> move;
+	move.push(drag.pos);
+	while (nb < 10 && !(move.empty())) {
+		drag.pos = move.top();
 		lab.tab[drag.pos.z][drag.pos.y][drag.pos.x].estLu = true;
 		lab.tab[drag.pos.z][drag.pos.y][drag.pos.x].car = nb + 48;
-		drag.move.pop();
+		move.pop();
 		++nb;
 		//Mettre à jour chemin connexe
 
@@ -57,6 +62,17 @@ void missionDragonSp2(Lab lab, Dragon drag) {
 				}
 			}
 
+			//reverse stack
+			if (deplacement.size() > 1) {
+				stack<int> reverse;
+				int size = deplacement.size();
+				for (unsigned int i = 0; i < size; ++i) {
+					reverse.push(deplacement.top());
+					deplacement.pop();
+				}
+				deplacement.swap(reverse);
+			}
+
 			while (!deplacement.empty()) {
 				Position mouv = drag.pos;
 				switch (deplacement.top()) {
@@ -66,12 +82,10 @@ void missionDragonSp2(Lab lab, Dragon drag) {
 							mouv.z = (NB_DAMIERS - 1) - drag.pos.z;
 							mouv.y = (lab.lin - 1) - drag.pos.y;
 							mouv.x = lab.col - 1;
-							drag.move.push(mouv);
 						}
 					}
 					else if (lab.tab[drag.pos.z][drag.pos.y][drag.pos.x - 1].car != '#') {
 						mouv.x--;
-						drag.move.push(mouv);
 					}
 					break;
 				case 2:
@@ -80,19 +94,16 @@ void missionDragonSp2(Lab lab, Dragon drag) {
 							mouv.z = (NB_DAMIERS - 1) - drag.pos.z;
 							mouv.y = lab.lin - drag.pos.y - 2;
 							mouv.x = lab.col - 1;
-							drag.move.push(mouv);
 						}
 					}
 					else if (lab.tab[drag.pos.z][drag.pos.y + 1][drag.pos.x - 1].car != '#') {
 						mouv.x--;
 						mouv.y++;
-						drag.move.push(mouv);
 					}
 					break;
 				case 3:
 					if (lab.tab[drag.pos.z][drag.pos.y + 1][drag.pos.x].car != '#') {
 						mouv.y++;
-						drag.move.push(mouv);
 					}
 					break;
 				case 4:
@@ -101,13 +112,11 @@ void missionDragonSp2(Lab lab, Dragon drag) {
 							mouv.z = (NB_DAMIERS - 1) - drag.pos.z;
 							mouv.y = lab.lin - drag.pos.y - 2;
 							mouv.x = 0;
-							drag.move.push(mouv);
 						}
 					}
 					else if (lab.tab[drag.pos.z][drag.pos.y + 1][drag.pos.x + 1].car != '#') {
 						mouv.x++;
 						mouv.y++;
-						drag.move.push(mouv);
 					}
 					break;
 				case 5:
@@ -116,12 +125,10 @@ void missionDragonSp2(Lab lab, Dragon drag) {
 							mouv.z = (NB_DAMIERS - 1) - drag.pos.z;
 							mouv.y = (lab.lin - 1) - drag.pos.y;
 							mouv.x = 0;
-							drag.move.push(mouv);
 						}
 					}
 					else if (lab.tab[drag.pos.z][drag.pos.y][drag.pos.x + 1].car != '#') {
 						mouv.x++;
-						drag.move.push(mouv);
 						}
 					break;
 				case 6:
@@ -130,19 +137,16 @@ void missionDragonSp2(Lab lab, Dragon drag) {
 							mouv.z = (NB_DAMIERS - 1) - drag.pos.z;
 							mouv.y = lab.lin - drag.pos.y;
 							mouv.x = 0;
-							drag.move.push(mouv);
 						}
 					}
 					else if (lab.tab[drag.pos.z][drag.pos.y - 1][drag.pos.x + 1].car != '#') {
 						mouv.x++;
 						mouv.y--;
-						drag.move.push(mouv);
 					}
 					break;
 				case 7:
 					if (lab.tab[drag.pos.z][drag.pos.y - 1][drag.pos.x].car != '#') {
 						mouv.y--;
-						drag.move.push(mouv);
 					}
 					break;
 				case 8:
@@ -151,22 +155,28 @@ void missionDragonSp2(Lab lab, Dragon drag) {
 							mouv.z = (NB_DAMIERS - 1) - drag.pos.z;
 							mouv.y = lab.lin - drag.pos.y;
 							mouv.x = lab.col - 1;
-							drag.move.push(mouv);
 						}
 					}
 					else if (lab.tab[drag.pos.z][drag.pos.y - 1][drag.pos.x - 1].car != '#') {
 						mouv.x--;
 						mouv.y--;
-						drag.move.push(mouv);
 					}
 					break;
 				default:
 					cerr << "Erreur lors de la recherche de chemin" << endl;
 				}
+				if (lab.tab[mouv.z][mouv.y][mouv.x].estLu == false) {
+					move.push(mouv);
+				}
 				deplacement.pop();
 			}
-			cout << "( " << drag.move.top().z << ", " << drag.move.top().y << ", " << drag.move.top().x << ")" << endl;
 			affichersp2(lab);
+			if (nb == 10) {
+				while (!(move.empty())) {
+					cout << "( " << move.top().x << ", " << move.top().y << ", " << move.top().z + 1 << ") ";
+					move.pop();
+				}
+			}
 		}
 		else {
 		cout << "Pas trouvé" << endl;

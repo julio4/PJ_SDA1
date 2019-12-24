@@ -8,28 +8,6 @@
 /*
 ARBORESCENCE DES #INCLUDE:
 
-							+----------+
-							| main.cpp |
-							+----+-----+
-								 ^
-								 |
-								 |
-						   +-----+-------+        +---------------+
-						   | tableauMb.h +<-------+ tableauMb.cpp |
-						   +-----+-------+        +---------------+
-		 +-----------+           ^
-		 | <fstream> +------+    |
-		 +-----------+      v    |
-						 +--+----+--------+     +------------------+
-						 | labyrintheMb.h +<----+ labyrintheMb.cpp |
-						 +--+----+--------+     +------------------+
-		+------------+      ^    ^
-		| <iostream> +------+    |
-		+------------+           |
-							 +---+----+
-							 | item.h |
-							 +--------+
-
 */
 
 #include "tableauMb.h"
@@ -42,8 +20,6 @@ int main() {
 	//locale::global(locale{ "" });
 
 	// Initialisation variable + input stream
-
-	unsigned int m, n;
 
 	ifstream in(FICHIER);
 	/* Ouverture du fichier .txt via la console
@@ -70,7 +46,8 @@ int main() {
 	in >> lab.col >> lab.lin;
 	//in >> m >> n;
 
-	lab.tab = initialiserTab(m, n);
+	
+	initialiserTab(lab);
 	initialiserLab(in, lab);
 	in.close();
 
@@ -79,12 +56,10 @@ int main() {
 
 	missionDragonSp2(lab, drag);
 
-	affichersp2(lab);
-
 	// Developpement
 
 	//
-
+	detruireDrag(drag);
 	detruireLab(lab);
 	detruireTab(lab);
 	return 0;
