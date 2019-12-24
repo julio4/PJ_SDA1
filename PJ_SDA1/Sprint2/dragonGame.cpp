@@ -2,10 +2,9 @@
 #include <iostream>
 #include "tableauMb.h"
 
-stack<Position> initialiserDrag(Position& posDrag) {
-	stack<Position> pile;
-	pile.push(posDrag);
-	return pile;
+Dragon initialiserDrag() {
+	Dragon drag;
+	return drag;
 }
 
 void detruireDrag(stack<Position>& pile){
@@ -14,17 +13,17 @@ void detruireDrag(stack<Position>& pile){
 	}
 }
 
-void missionDragonSp2(Item*** tab, stack<Position>& pile, Position& posDrag, Position& posPDM, unsigned int& m, unsigned int& n) {
+void missionDragonSp2(Lab lab, Dragon drag) {
 	unsigned int nb = 0;
-	while (nb < 10) {
-		tab[posDrag.z][posDrag.y][posDrag.x].estLu = true;
-		tab[posDrag.z][posDrag.y][posDrag.x].car = nb + 48;
+	while (nb < 10 && !(drag.move.empty())) {
+		drag.pos = drag.move.top();
+		lab.tab[drag.pos.z][drag.pos.y][drag.pos.x].estLu = true;
+		lab.tab[drag.pos.z][drag.pos.y][drag.pos.x].car = nb + 48;
+		drag.move.pop();
 		++nb;
-		pile.pop(); // dépiler position ( i, j)
-
 		//Mettre à jour chemin connexe
 
-		if (!(posDrag.z == posPDM.z && posDrag.y == posPDM.y && posDrag.x == posPDM.x)) {
+		if (!(drag.pos.z == lab.PDM.z && drag.pos.y == lab.PDM.y && drag.pos.x == lab.PDM.x)) {
 
 			//Orientation
 			stack<int> deplacement;
@@ -37,7 +36,7 @@ void missionDragonSp2(Item*** tab, stack<Position>& pile, Position& posDrag, Pos
 				case 2:
 				case 3:
 				case 4:
-					if (posDrag.y != (n - 1))
+					if (drag.pos.y != (lab.lin - 1))
 						deplacement.push(i);
 					else
 						i = 4;
@@ -48,7 +47,7 @@ void missionDragonSp2(Item*** tab, stack<Position>& pile, Position& posDrag, Pos
 				case 6:
 				case 7:
 				case 8:
-					if (posDrag.y != 0)
+					if (drag.pos.y != 0)
 						deplacement.push(i);
 					else
 						i = 8;
@@ -59,99 +58,106 @@ void missionDragonSp2(Item*** tab, stack<Position>& pile, Position& posDrag, Pos
 			}
 
 			while (!deplacement.empty()) {
+				Position mouv = drag.pos;
 				switch (deplacement.top()) {
 				case 1:
-					if (posDrag.x == 0) {
-						if (tab[(NB_DAMIERS - 1) - posDrag.z][(n - 1) - posDrag.y][posDrag.x].car != '#') {
-							posDrag.z = (NB_DAMIERS - 1) - posDrag.z;
-							posDrag.y = (n - 1) - posDrag.y;
-							pile.push(posDrag);
+					if (drag.pos.x == 0) {
+						if (lab.tab[(NB_DAMIERS - 1) - drag.pos.z][(lab.lin - 1) - drag.pos.y][lab.col - 1].car != '#') {
+							mouv.z = (NB_DAMIERS - 1) - drag.pos.z;
+							mouv.y = (lab.lin - 1) - drag.pos.y;
+							mouv.x = lab.col - 1;
+							drag.move.push(mouv);
 						}
 					}
-					else if (tab[posDrag.z][posDrag.y][posDrag.x - 1].car != '#') {
-						posDrag.x--;
-						pile.push(posDrag);
+					else if (lab.tab[drag.pos.z][drag.pos.y][drag.pos.x - 1].car != '#') {
+						mouv.x--;
+						drag.move.push(mouv);
 					}
 					break;
 				case 2:
-					if (posDrag.x == 0) {
-						if (tab[(NB_DAMIERS - 1) - posDrag.z][(n - 1) - posDrag.y][posDrag.x].car != '#') {
-							posDrag.z = (NB_DAMIERS - 1) - posDrag.z;
-							posDrag.y = (n - 1) - posDrag.y;
-							pile.push(posDrag);
+					if (drag.pos.x == 0) {
+						if (lab.tab[(NB_DAMIERS - 1) - drag.pos.z][lab.lin - drag.pos.y - 2][lab.col - 1].car != '#') {
+							mouv.z = (NB_DAMIERS - 1) - drag.pos.z;
+							mouv.y = lab.lin - drag.pos.y - 2;
+							mouv.x = lab.col - 1;
+							drag.move.push(mouv);
 						}
 					}
-					else if (tab[posDrag.z][posDrag.y + 1][posDrag.x - 1].car != '#') {
-						posDrag.x--;
-						posDrag.y++;
-						pile.push(posDrag);
+					else if (lab.tab[drag.pos.z][drag.pos.y + 1][drag.pos.x - 1].car != '#') {
+						mouv.x--;
+						mouv.y++;
+						drag.move.push(mouv);
 					}
 					break;
 				case 3:
-					if (tab[posDrag.z][posDrag.y + 1][posDrag.x].car != '#') {
-						posDrag.y++;
-						pile.push(posDrag);
+					if (lab.tab[drag.pos.z][drag.pos.y + 1][drag.pos.x].car != '#') {
+						mouv.y++;
+						drag.move.push(mouv);
 					}
 					break;
 				case 4:
-					if (posDrag.x == (m - 1)) {
-						if (tab[(NB_DAMIERS - 1) - posDrag.z][(n - 1) - posDrag.y][posDrag.x].car != '#') {
-							posDrag.z = (NB_DAMIERS - 1) - posDrag.z;
-							posDrag.y = (n - 1) - posDrag.y;
-							pile.push(posDrag);
+					if (drag.pos.x == (lab.col - 1)) {
+						if (lab.tab[(NB_DAMIERS - 1) - drag.pos.z][lab.lin - drag.pos.y - 2][0].car != '#') {
+							mouv.z = (NB_DAMIERS - 1) - drag.pos.z;
+							mouv.y = lab.lin - drag.pos.y - 2;
+							mouv.x = 0;
+							drag.move.push(mouv);
 						}
 					}
-					else if (tab[posDrag.z][posDrag.y + 1][posDrag.x + 1].car != '#') {
-						posDrag.x++;
-						posDrag.y++;
-						pile.push(posDrag);
+					else if (lab.tab[drag.pos.z][drag.pos.y + 1][drag.pos.x + 1].car != '#') {
+						mouv.x++;
+						mouv.y++;
+						drag.move.push(mouv);
 					}
 					break;
 				case 5:
-					if (posDrag.x == (m - 1)) {
-						if (tab[(NB_DAMIERS - 1) - posDrag.z][(n - 1) - posDrag.y][posDrag.x].car != '#') {
-							posDrag.z = (NB_DAMIERS - 1) - posDrag.z;
-							posDrag.y = (n - 1) - posDrag.y;
-							pile.push(posDrag);
+					if (drag.pos.x == (lab.col - 1)) {
+						if (lab.tab[(NB_DAMIERS - 1) - drag.pos.z][(lab.lin - 1) - drag.pos.y][0].car != '#') {
+							mouv.z = (NB_DAMIERS - 1) - drag.pos.z;
+							mouv.y = (lab.lin - 1) - drag.pos.y;
+							mouv.x = 0;
+							drag.move.push(mouv);
 						}
 					}
-					else if (tab[posDrag.z][posDrag.y][posDrag.x + 1].car != '#') {
-						posDrag.x++;
-						pile.push(posDrag);
+					else if (lab.tab[drag.pos.z][drag.pos.y][drag.pos.x + 1].car != '#') {
+						mouv.x++;
+						drag.move.push(mouv);
 						}
 					break;
 				case 6:
-					if (posDrag.x == (m - 1)) {
-						if (tab[(NB_DAMIERS - 1) - posDrag.z][(n - 1) - posDrag.y][posDrag.x].car != '#') {
-							posDrag.z = (NB_DAMIERS - 1) - posDrag.z;
-							posDrag.y = (n - 1) - posDrag.y;
-							pile.push(posDrag);
+					if (drag.pos.x == (lab.col - 1)) {
+						if (lab.tab[(NB_DAMIERS - 1) - drag.pos.z][lab.lin - drag.pos.y][0].car != '#') {
+							mouv.z = (NB_DAMIERS - 1) - drag.pos.z;
+							mouv.y = lab.lin - drag.pos.y;
+							mouv.x = 0;
+							drag.move.push(mouv);
 						}
 					}
-					else if (tab[posDrag.z][posDrag.y - 1][posDrag.x + 1].car != '#') {
-						posDrag.x++;
-						posDrag.y--;
-						pile.push(posDrag);
+					else if (lab.tab[drag.pos.z][drag.pos.y - 1][drag.pos.x + 1].car != '#') {
+						mouv.x++;
+						mouv.y--;
+						drag.move.push(mouv);
 					}
 					break;
 				case 7:
-					if (tab[posDrag.z][posDrag.y - 1][posDrag.x].car != '#') {
-						posDrag.y--;
-						pile.push(posDrag);
+					if (lab.tab[drag.pos.z][drag.pos.y - 1][drag.pos.x].car != '#') {
+						mouv.y--;
+						drag.move.push(mouv);
 					}
 					break;
 				case 8:
-					if (posDrag.x == 0) {
-						if (tab[(NB_DAMIERS - 1) - posDrag.z][(n - 1) - posDrag.y][posDrag.x].car != '#') {
-							posDrag.z = (NB_DAMIERS - 1) - posDrag.z;
-							posDrag.y = (n - 1) - posDrag.y;
-							pile.push(posDrag);
+					if (drag.pos.x == 0) {
+						if (lab.tab[(NB_DAMIERS - 1) - drag.pos.z][lab.lin - drag.pos.y][lab.col - 1].car != '#') {
+							mouv.z = (NB_DAMIERS - 1) - drag.pos.z;
+							mouv.y = lab.lin - drag.pos.y;
+							mouv.x = lab.col - 1;
+							drag.move.push(mouv);
 						}
 					}
-					else if (tab[posDrag.z][posDrag.y - 1][posDrag.x - 1].car != '#') {
-						posDrag.x--;
-						posDrag.y--;
-						pile.push(posDrag);
+					else if (lab.tab[drag.pos.z][drag.pos.y - 1][drag.pos.x - 1].car != '#') {
+						mouv.x--;
+						mouv.y--;
+						drag.move.push(mouv);
 					}
 					break;
 				default:
@@ -159,8 +165,11 @@ void missionDragonSp2(Item*** tab, stack<Position>& pile, Position& posDrag, Pos
 				}
 				deplacement.pop();
 			}
-			affichersp2(tab, m, n);
-
+			cout << "( " << drag.move.top().z << ", " << drag.move.top().y << ", " << drag.move.top().x << ")" << endl;
+			affichersp2(lab);
+		}
+		else {
+		cout << "Pas trouvé" << endl;
 		}
 	}
 }

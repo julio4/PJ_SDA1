@@ -15,7 +15,7 @@
 * @param[in,out] y : nombre de lignes du labyrinthe
 * @return tab : le tableau 3D d'ItemMb
 */
-Item*** initialiserTab(unsigned int& x, unsigned int& y);
+Case*** initialiserTab(unsigned int& x, unsigned int& y);
 
 /**
 * @brief Désalloue tab
@@ -25,4 +25,4 @@ Item*** initialiserTab(unsigned int& x, unsigned int& y);
 * @param[in,out] y : nombre de lignes du labyrinthe
 * @pre tab est initialisé
 */
-void detruireTab(Item*** tab, unsigned int& x, unsigned int& y);
+void detruireTab(Lab lab);

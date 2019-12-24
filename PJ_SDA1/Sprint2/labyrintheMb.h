@@ -17,7 +17,7 @@
 * @param[in] y : nombre de lignes du tableau
 * @pre tab est initialisé, in est ouvert
 */
-void initialiserLab(ifstream& in, Item*** tab, unsigned int& x, unsigned int& y);
+void initialiserLab(ifstream& in, Lab lab);
 
 /**
 * @brief Réinitialise le tableau 3D à des valeures nulles.
@@ -27,7 +27,7 @@ void initialiserLab(ifstream& in, Item*** tab, unsigned int& x, unsigned int& y)
 * @param[in] y : nombre de lignes du labyrinthe
 * @pre tab est initialisé
 */
-void detruireLab(Item*** tab, unsigned int& x, unsigned int& y);
+void detruireLab(Lab lab);
 
 /**
 * @brief Affiche la sortie demandée en Sprint 1 (taille du labyrinthe et les 2 labyrinthes)
@@ -36,4 +36,4 @@ void detruireLab(Item*** tab, unsigned int& x, unsigned int& y);
 * @param[in] y : nombre de lignes du labyrinthe
 * @pre tab est initialisé et affecté
 */
-void affichersp2(Item*** tab, unsigned int& x, unsigned int& y);
+void affichersp2(Lab lab);

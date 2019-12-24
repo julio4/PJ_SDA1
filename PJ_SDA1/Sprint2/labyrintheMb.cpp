@@ -13,15 +13,13 @@
 * @param[in] y : nombre de lignes du tableau
 * @pre tab est initialisé, in est ouvert
 */
-void initialiserLab(ifstream& in, Item*** tab, unsigned int& x, unsigned int& y) {
-	Item item;
+void initialiserLab(ifstream& in, Lab lab) {
 	for (unsigned int i = 0; i < NB_DAMIERS; ++i) {
 		//Ecrit tableau[i]
-		for (unsigned int j = 0; j < y; ++j) {
+		for (unsigned int j = 0; j < lab.lin; ++j) {
 			//Ecrit ligne j
-			for (unsigned int l = 0; l < x; ++l) {
-				in >> item.car;
-				tab[i][j][l] = item;
+			for (unsigned int l = 0; l < lab.col; ++l) {
+				in >> lab.tab[i][j][l].car;
 			}
 		}
 	}
@@ -35,14 +33,14 @@ void initialiserLab(ifstream& in, Item*** tab, unsigned int& x, unsigned int& y)
 * @param[in] y : nombre de lignes du labyrinthe
 * @pre tab est initialisé
 */
-void detruireLab(Item*** tab, unsigned int& x, unsigned int& y) {
+void detruireLab(Lab lab) {
 	for (unsigned int i = 0; i < NB_DAMIERS; ++i) {
 		//Supprime tab[i]
-		for (unsigned int j = 0; j < y; ++j) {
+		for (unsigned int j = 0; j < lab.lin; ++j) {
 			//Supprime ligne j
-			for (unsigned int l = 0; l < x; ++l) {
-				tab[i][j][l].car = NULL;
-				tab[i][j][l].estLu = false;
+			for (unsigned int l = 0; l < lab.col; ++l) {
+				lab.tab[i][j][l].car = NULL;
+				lab.tab[i][j][l].estLu = false;
 			}
 		}
 	}
@@ -55,14 +53,14 @@ void detruireLab(Item*** tab, unsigned int& x, unsigned int& y) {
 * @param[in] y : nombre de lignes du labyrinthe
 * @pre tab est initialisé et affecté
 */
-void affichersp2(Item*** tab, unsigned int& x, unsigned int& y) {
-	cout << x << " " << y << endl;
-	for (int i = 0; i < NB_DAMIERS; ++i) {
+void affichersp2(Lab lab) {
+	cout << lab.col << " " << lab.lin << endl;
+	for ( unsigned int i = 0; i < NB_DAMIERS; ++i) {
 		//Lire tab[i]
-		for (int j = 0; j < y; ++j) {
+		for (unsigned int j = 0; j < lab.lin; ++j) {
 			//Lire ligne j
-			for (int l = 0; l < x; ++l) {
-				cout << tab[i][j][l].car;
+			for (unsigned int l = 0; l < lab.col; ++l) {
+				cout << lab.tab[i][j][l].car;
 			}
 			cout << endl;
 		}

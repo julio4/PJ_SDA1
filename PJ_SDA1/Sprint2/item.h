@@ -8,3 +8,10 @@
 #include "case.h"
 
 typedef Case Item;
+
+typedef struct {
+	Case*** tab;
+	unsigned int col;
+	unsigned int lin;
+	Position PDM;
+} Lab;

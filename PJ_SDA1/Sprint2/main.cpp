@@ -66,29 +66,26 @@ int main() {
 	}
 
 	// Execution Sprint2
-	in >> m >> n;
+	Lab lab;
+	in >> lab.col >> lab.lin;
+	//in >> m >> n;
 
-	Item*** tableauMb = initialiserTab(m, n);
-	initialiserLab(in, tableauMb, m, n);
+	lab.tab = initialiserTab(m, n);
+	initialiserLab(in, lab);
 	in.close();
 
-	Position posDrag;
-	Position posPDM;
-	initialiserPos(posDrag, posPDM, tableauMb, m, n);
-	stack<Position> pile = initialiserDrag(posDrag);
+	Dragon drag = initialiserDrag();
+	initialiserPos(lab, drag);
 
-	missionDragonSp2(tableauMb, pile, posDrag, posPDM, m, n);
+	missionDragonSp2(lab, drag);
 
-	affichersp2(tableauMb, m, n);
+	affichersp2(lab);
 
 	// Developpement
 
-	cout << endl;
-	cout << "z = " << pile.top().z << " y = " << pile.top().y << " x = " << pile.top().x << endl;
-
 	//
 
-	detruireLab(tableauMb, m, n);
-	detruireTab(tableauMb, m, n);
+	detruireLab(lab);
+	detruireTab(lab);
 	return 0;
 }
