@@ -4,6 +4,8 @@
  * Projet SDA 1
  */
 #pragma once
+
+#include <stack>
 #include "indexPositionMb.h"
 
 /**
@@ -23,10 +25,10 @@ Dragon initialiserDrag(Lab& lab);
 void detruireDrag(Dragon& drag);
 
 /**
- * @brief Execute le sprint 2 et l'affiche
+ * @brief Execute le sprint 3 et l'affiche
  * @see initialiserDrag, initialiserTab, initialiserLab, affichersp2
  * @param[in-out] lab : le labyrinthe
  * @param[in-out] drag : le dragon
  * @pre Lab est initialisé, drag est initialisé
  */
-void missionDragonSp2(Lab& lab, Dragon& drag);
+void missionDragonSp3(Lab& lab, Dragon& drag);

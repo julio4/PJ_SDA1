@@ -1,6 +1,6 @@
 /**
  * @file labyrintheMb.cpp
- * @brief Permet d'affecter et de réinitialiser le labyrinthe, et d'afficher le sprint 2
+ * @brief Permet d'affecter et de réinitialiser le labyrinthe, et d'afficher le sprint 3
  * Projet SDA 1
  */
 #include "labyrintheMb.h"
@@ -44,12 +44,15 @@ void detruireLab(Lab& lab) {
 }
 
 /**
- * @brief Affiche le Sprint 2
- * @see missionDragonSp2, afin d'effectuer le sprint 2 et provoquer son affichage par l'appel de cette fonction
+ * @brief Affiche le Sprint 3
+ * @see missionDragonSp3, afin d'effectuer le sprint 3 et provoquer son affichage par l'appel de cette fonction
  * @param[in] lab : Labyrinthe contenant le tableau 3D et ses dimensions
  * @pre lab(.tab, .col, .lin) est initialisé
  */
-void affichersp2(Lab& lab, ofstream iwrite) {
+void affichersp3(Lab& lab) {
+
+	ofstream iwrite;
+	iwrite.open(file_out, ofstream::out | ofstream::trunc);
 
 	iwrite << lab.col << " " << lab.lin << endl;
 	for ( unsigned int i = 0; i < NB_DAMIERS; ++i) {

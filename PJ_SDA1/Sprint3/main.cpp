@@ -1,8 +1,8 @@
 /**
  * @file main.cpp
  * @author Jules Doumèche, Martin Gwenole
- * @version 2 - 2019
- * @brief  Projet SDA - Sprint 2
+ * @version 3 - 2019
+ * @brief  Projet SDA - Sprint 3
  */
 
 #include "tableauMb.h"
@@ -16,7 +16,8 @@ int main() {
 
 	ifstream in(fichier);
 	if (!in) {
-		cerr << "Erreur! Fichier introuvable" << endl;
+		cout << "Erreur!" << endl;
+		cerr << "Fichier introuvable" << endl;
 		return 1;
 	}
 
@@ -31,7 +32,7 @@ int main() {
 	//Recherche Dragon et affichage
 
 	Dragon drag = initialiserDrag(lab);
-	missionDragonSp2(lab, drag);
+	missionDragonSp3(lab, drag);
 
 	// Desallouement
 	detruireDrag(drag);

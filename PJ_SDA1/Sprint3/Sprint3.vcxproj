@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{B7BAF78B-E979-4108-B5FE-7BF8DBE324A1}</ProjectGuid>
-    <RootNamespace>Sprint2</RootNamespace>
+    <ProjectGuid>{1AC788A7-4C1F-405D-BED4-D9E224F46CAE}</ProjectGuid>
+    <RootNamespace>Sprint3</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -143,7 +143,9 @@
     <ClCompile Include="tableauMb.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Sprint1\inSmall.txt" />
+    <Text Include="inLarge.txt" />
+    <Text Include="inMedium.txt" />
+    <Text Include="inSmall.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

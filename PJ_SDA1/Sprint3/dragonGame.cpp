@@ -30,24 +30,22 @@ void detruireDrag(Dragon& drag){
 }
 
 /**
- * @brief Execute le sprint 2 et l'affiche
+ * @brief Execute le sprint 3 et l'affiche
  * @see initialiserDrag, initialiserTab, initialiserLab, affichersp2
  * @param[in-out] lab : le labyrinthe
  * @param[in-out] drag : le dragon
  * @pre Lab est initialisé, drag est initialisé
  */
-void missionDragonSp2(Lab& lab, Dragon& drag) {
-	unsigned int nb = 0;
+void missionDragonSp3(Lab& lab, Dragon& drag) {
 	stack<Position> move;
 	move.push(drag.pos);
-	while (nb < 10 && !(move.empty())) {
+	while (!(move.empty())) {
 		drag.pos = move.top();
 		lab.tab[drag.pos.z][drag.pos.y][drag.pos.x].estLu = true;
-		lab.tab[drag.pos.z][drag.pos.y][drag.pos.x].car = nb + 48;
+		lab.tab[drag.pos.z][drag.pos.y][drag.pos.x].car = 'V';
 		move.pop();
-		++nb;
 
-		if (!(nb == 10)) {
+		if (!(drag.pos.z == lab.PDM.z && drag.pos.y == lab.PDM.y && drag.pos.x == lab.PDM.x)) {
 
 			//Orientation
 			stack<int> deplacement;
@@ -194,32 +192,14 @@ void missionDragonSp2(Lab& lab, Dragon& drag) {
 					cerr << "Erreur lors de la recherche de chemin" << endl;
 				}
 				if (lab.tab[mouv.z][mouv.y][mouv.x].estLu == false) {
-					lab.tab[mouv.z][mouv.y][mouv.x].estLu = true;
 					move.push(mouv);
 				}
 				deplacement.pop();
 			}
-
-			/* SP2
-			if (nb == 10) {
-				//Affichage du mouvement
-				affichersp2(lab);
-				while (!(move.empty())) {
-					cout << "( " << move.top().x << ", " << move.top().y << ", " << move.top().z + 1 << ") ";
-					move.pop();
-				}
-			}
-			*/
 		}
 		else {
 			//PDM atteint
-			ofstream iwrite;
-			iwrite.open(file_out, ofstream::out | ofstream::trunc);
-			affichersp2(lab, iwrite);
-			while (!(move.empty())) {
-				iwrite << "( " << move.top().x << ", " << move.top().y << ", " << move.top().z + 1 << ") ";
-				move.pop();
-			}
+			affichersp3(lab);
 		}
 	}
 }
