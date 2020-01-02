@@ -30,7 +30,7 @@ void detruireDrag(Dragon& drag){
 }
 
 /**
- * @brief Execute le sprint 3 et l'affiche
+ * @brief Execute le sprint 4 et l'affiche
  * @see initialiserDrag, initialiserTab, initialiserLab, affichersp2
  * @param[in-out] lab : le labyrinthe
  * @param[in-out] drag : le dragon
@@ -40,17 +40,29 @@ void missionDragonSp3(Lab& lab, Dragon& drag) {
 	stack<Position> move;
 	move.push(drag.pos);
 	bool atteint = false;
-	while (!(move.empty())) {
+
+	while (!(move.empty() && !atteint)) {
+
+		while (!estConnexe(lab, drag.pos, move.top())) {
+			move.pop();
+		}
 		drag.pos = move.top();
-		lab.tab[drag.pos.z][drag.pos.y][drag.pos.x].estLu = true;
-		lab.tab[drag.pos.z][drag.pos.y][drag.pos.x].car = 'V';
+
+		//lab.tab[drag.pos.z][drag.pos.y][drag.pos.x].estLu = true;
+		//lab.tab[drag.pos.z][drag.pos.y][drag.pos.x].car = 'C';
 		move.pop();
 
-		if (drag.pos.z == lab.PDM.z && drag.pos.y == lab.PDM.y && drag.pos.x == lab.PDM.x) {
+
+		//if (drag.pos.z == lab.PDM.z && drag.pos.y == lab.PDM.y && drag.pos.x == lab.PDM.x) {
+		//	atteint = true;
+		//}
+		if (move.top().z == lab.PDM.z && move.top().y == lab.PDM.y && move.top().x == lab.PDM.x) {
+			//valider le chemin connexe
 			atteint = true;
 		}
-
 		if (!atteint) {
+
+			//On regarde d'abord les cases accessibles
 
 			//Orientation
 			stack<int> deplacement;
@@ -103,9 +115,12 @@ void missionDragonSp3(Lab& lab, Dragon& drag) {
 				}
 			}
 
+			//On vérifie maintenant chaque déplacement possible dans l'ordre décroissant
+			//Si la case est une case libre, et qu'elle n'est pas lue, on l'ajoute au chemin actuel et on la définit comme lu
+
 			//Recherche et mouvement
 			while (!deplacement.empty()) {
-				Position mouv = drag.pos;
+				Position mouv = move.top();
 				switch (deplacement.top()) {
 				case 1:
 					if (drag.pos.x == 0) {
@@ -207,11 +222,13 @@ void missionDragonSp3(Lab& lab, Dragon& drag) {
 			break;
 		}
 	}
+
+
 	if (atteint) {
-		affichersp3(lab);
+		affichersp4(lab);
 	}
 	else {
 		cout << "Aucun chemin d'accès vers les Plans du Monde" << endl;
-		affichersp3(lab);
+		affichersp4(lab);
 	}
 }

@@ -199,22 +199,9 @@ void missionDragonSp2(Lab& lab, Dragon& drag) {
 				}
 				deplacement.pop();
 			}
-
-			/* SP2
-			if (nb == 10) {
-				//Affichage du mouvement
-				affichersp2(lab);
-				while (!(move.empty())) {
-					cout << "( " << move.top().x << ", " << move.top().y << ", " << move.top().z + 1 << ") ";
-					move.pop();
-				}
-			}
-			*/
 		}
 		else {
 			//PDM atteint
-			ofstream iwrite;
-			iwrite.open(file_out, ofstream::out | ofstream::trunc);
 			affichersp2(lab, iwrite);
 			while (!(move.empty())) {
 				iwrite << "( " << move.top().x << ", " << move.top().y << ", " << move.top().z + 1 << ") ";
