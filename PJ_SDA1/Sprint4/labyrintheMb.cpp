@@ -52,25 +52,24 @@ void detruireLab(Lab& lab) {
  */
 void affichersp5(Lab& lab, stack<Position>& chemin) {
 
-	ofstream iwrite;
-	iwrite.open(file_out, ofstream::out | ofstream::trunc);
+	
 
-	iwrite << lab.col << " " << lab.lin << endl;
+	cout << lab.col << " " << lab.lin << endl;
 	for ( unsigned int i = 0; i < NB_DAMIERS; ++i) {
 		//Lire tab[i]
 		for (unsigned int j = 0; j < lab.lin; ++j) {
 			//Lire ligne j
 			for (unsigned int l = 0; l < lab.col; ++l) {
-				iwrite << lab.tab[i][j][l].car;
+				cout << lab.tab[i][j][l].car;
 			}
-			iwrite << endl;
+			cout << endl;
 		}
-		iwrite << endl;
+		cout << endl;
 	}
 	unsigned int size = chemin.size();
 	for (unsigned int i = 0; i < size; ++i) {
-		iwrite << "C(" << chemin.top().x << "," << chemin.top().y << "," << chemin.top().z + 1 << ")->";
+		cout << "C(" << chemin.top().x << "," << chemin.top().y << "," << chemin.top().z + 1 << ")->";
 		chemin.pop();
 	}
-	iwrite << endl;
+	cout << endl;
 }
